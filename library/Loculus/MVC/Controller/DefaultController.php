@@ -118,4 +118,10 @@ class DefaultController extends AbstractActionController
         }
         return $this->cacheAdapter;
     }
+
+    public function translate($text)
+    {
+        $helper = $this->getServiceLocator()->get('viewhelpermanager')->get('translate');
+        return $helper($text);
+    }
 }
