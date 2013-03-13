@@ -34,7 +34,8 @@ class DefaultController extends AbstractActionController
 
     public function __construct()
     {
-        $this->viewModel = new ViewModel();
+        $event = $this->getEvent();
+        $this->viewModel = $event->getViewModel();
 
         $this->viewModel->setVariable('construct', __NAMESPACE__ . '\\' . __CLASS__);
 
