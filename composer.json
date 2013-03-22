@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Zend Framework extensions",
     "keywords": [
-        "loculus",
+        "loculus"
     ],
     "homepage": "http://evolic.eu5.org/",
     "license": "New BSD",
@@ -23,16 +23,12 @@
         "php": ">=5.3.2",
         "zendframework/zendframework": "2.*"
     },
-    "require-dev": {
-    },
-    "suggest": {
-    },
     "autoload": {
         "psr-0": { "Gedmo": "library/" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "dev-master"
+            "dev-master": "0.2.x-dev"
         }
     }
 }
