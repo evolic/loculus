@@ -7,9 +7,3 @@ nbproject
 .project
 .settings
 /vendor
-tags
-*local*.php
-composer.phar
-/data/cache
-/data/log
-phpinfo.php
