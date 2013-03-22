@@ -1,0 +1,38 @@
+{
+    "name": "evolic/loculus",
+    "type": "library",
+    "description": "Zend Framework extensions",
+    "keywords": [
+        "loculus",
+    ],
+    "homepage": "http://evolic.eu5.org/",
+    "license": "New BSD",
+    "authors": [
+        {
+            "name": "Tomasz Kuter",
+            "email": "evolic@interia.pl"
+        }
+    ],
+    "support": {
+        "email": "evolic@interia.pl",
+        "wiki": "https://github.com/evolic/loculus/tree/master/doc",
+        "issues": "https://github.com/evolic/loculus/issues",
+        "source": "https://github.com/evolic/loculus"
+    },
+    "require": {
+        "php": ">=5.3.2",
+        "zendframework/zendframework": "2.*"
+    },
+    "require-dev": {
+    },
+    "suggest": {
+    },
+    "autoload": {
+        "psr-0": { "Gedmo": "library/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "dev-master"
+        }
+    }
+}
