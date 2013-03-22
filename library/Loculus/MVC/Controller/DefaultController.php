@@ -48,38 +48,8 @@ class DefaultController extends AbstractActionController
         $event = $this->getEvent();
         $this->viewModel = $event->getViewModel();
 
-        $this->viewModel->setVariable('construct', __NAMESPACE__ . '\\' . __CLASS__);
-
-//         if (!$this->getServiceLocator()->get('AuthService')->hasIdentity()) {
-//             $identity = $this->getServiceLocator()->get('AuthService')->getIdentity();
-//         } else {
-//             $identity = null;
-//         }
-//         $this->viewModel->setVariable('identity', $identity);
-
-
         $sharedEvents = StaticEventManager::getInstance();
         $sharedEvents->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, function(Event $event) {
-            // get view model
-            $viewModel = $event->getViewModel();
-
-            // assign identity
-            $this->getServiceLocator()->get('Zend\Log')->info(
-                $this->getServiceLocator()->get('AuthService')->hasIdentity() ? 'has identity' : 'has not identity'
-            );
-
-            $identity = null;
-            if ($this->getServiceLocator()->get('AuthService')->hasIdentity()) {
-                $identity = $this->getServiceLocator()->get('AuthService')->getIdentity();
-            }
-            $this->getServiceLocator()->get('Zend\Log')->info(is_array($identity) ? 'is array' : 'is not an array');
-//             $this->getServiceLocator()->get('Zend\Log')->info(new Log\Converter($identity));
-            $viewModel->setVariable('identity', $identity);
-
-//             $this->flashmessenger()->addMessage('Sample warning');
-//             $this->flashmessenger()->addSuccessMessage('Sample success message');
-//             $this->flashmessenger()->addErrorMessage('Sample error');
-
             // assign flashmessanger messages
             $messages = $this->flashmessenger()->getSuccessMessages();
             $viewModel->setVariable('messages', $messages);
