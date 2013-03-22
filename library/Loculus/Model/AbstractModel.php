@@ -1,4 +1,10 @@
 <?php
+/**
+ * Base model class
+ *
+ * @copyright Copyright (c) 2013 Tomasz Kuter <evolic_at_interia_dot_pl>
+ * @license   http://evolic.eu5.org/en/new-bsd-licence.html New BSD License
+ */
 
 namespace Loculus\Model;
 
@@ -7,7 +13,11 @@ use Doctrine\ORM\EntityManager;
 use Zend\Cache\Storage\StorageInterface,
     Zend\ServiceManager\ServiceManager;
 
-
+/**
+ * Base model class
+ * @author Tomasz Kuter <evolic_at_interia_dot_pl>
+ *
+ */
 class AbstractModel
 {
     /**

@@ -1,7 +1,18 @@
 <?php
+/**
+ * Objects converter class
+ *
+ * @copyright Copyright (c) 2013 Tomasz Kuter <evolic_at_interia_dot_pl>
+ * @license   http://evolic.eu5.org/en/new-bsd-licence.html New BSD License
+ */
 
 namespace Loculus\Log;
 
+/**
+ * Objects converter class
+ * @author Tomasz Kuter <evolic_at_interia_dot_pl>
+ *
+ */
 class Converter
 {
     /**

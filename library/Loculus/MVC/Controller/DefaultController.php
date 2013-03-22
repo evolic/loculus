@@ -1,4 +1,10 @@
 <?php
+/**
+ * Extended controller class
+ *
+ * @copyright Copyright (c) 2013 Tomasz Kuter <evolic_at_interia_dot_pl>
+ * @license   http://evolic.eu5.org/en/new-bsd-licence.html New BSD License
+ */
 
 namespace Loculus\Mvc\Controller;
 
@@ -12,6 +18,11 @@ use Zend\Cache\Storage\StorageInterface,
 use Doctrine\ORM\EntityManager;
 use Loculus\Log;
 
+/**
+ * Extended controller class
+ * @author Tomasz Kuter <evolic_at_interia_dot_pl>
+ *
+ */
 class DefaultController extends AbstractActionController
 {
     /**

@@ -1,8 +1,17 @@
 <?php
+/**
+ * Basic Doctrine ORM Entity class
+ *
+ * @copyright Copyright (c) 2013 Tomasz Kuter <evolic_at_interia_dot_pl>
+ * @license   http://evolic.eu5.org/en/new-bsd-licence.html New BSD License
+ */
 
 namespace Loculus\Entity;
 
-
+/**
+ * Basic Doctrine ORM Entity class
+ * @author Tomasz Kuter <evolic_at_interia_dot_pl>
+ */
 class Base
 {
     /**
