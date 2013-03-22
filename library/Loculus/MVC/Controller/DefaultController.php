@@ -50,6 +50,9 @@ class DefaultController extends AbstractActionController
 
         $sharedEvents = StaticEventManager::getInstance();
         $sharedEvents->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, function(Event $event) {
+            // get view model
+            $viewModel = $event->getViewModel();
+
             // assign flashmessanger messages
             $messages = $this->flashmessenger()->getSuccessMessages();
             $viewModel->setVariable('messages', $messages);
