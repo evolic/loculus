@@ -24,7 +24,7 @@
         "zendframework/zendframework": "2.*"
     },
     "autoload": {
-        "psr-0": { "Gedmo": "library/" }
+        "psr-0": { "Loculus": "library/" }
     },
     "extra": {
         "branch-alias": {
