@@ -72,6 +72,9 @@ class DefaultController extends AbstractActionController
             $view->setVariable('warnings', $warnings);
             $errors = $this->flashmessenger()->getErrorMessages();
             $view->setVariable('errors', $errors);
+
+            // assign variables to action view
+            $this->viewModel->setVariables($view->getVariables());
         });
     }
 
