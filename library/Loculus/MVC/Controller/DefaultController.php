@@ -50,18 +50,28 @@ class DefaultController extends AbstractActionController
 
         $sharedEvents = StaticEventManager::getInstance();
         $sharedEvents->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, function(Event $event) {
-            // get view model
-            $viewModel = $event->getViewModel();
+            // get view model for layout
+            $view = $event->getViewModel();
+
+            // assign locales information
+            $sm = $event->getApplication()->getServiceManager();
+            $session = $sm->get('session');
+            if (isset($session->locale)) {
+                $view->setVariable('locale', $session->locale);
+            }
+            if (isset($session->locales)) {
+                $view->setVariable('locales', $session->locales);
+            }
 
             // assign flashmessanger messages
             $messages = $this->flashmessenger()->getSuccessMessages();
-            $viewModel->setVariable('messages', $messages);
+            $view->setVariable('messages', $messages);
             $info = $this->flashmessenger()->getInfoMessages();
-            $viewModel->setVariable('info', $info);
+            $view->setVariable('info', $info);
             $warnings = $this->flashmessenger()->getMessages();
-            $viewModel->setVariable('warnings', $warnings);
+            $view->setVariable('warnings', $warnings);
             $errors = $this->flashmessenger()->getErrorMessages();
-            $viewModel->setVariable('errors', $errors);
+            $view->setVariable('errors', $errors);
         });
     }
 
