@@ -54,14 +54,10 @@ class DefaultController extends AbstractActionController
             $view = $event->getViewModel();
 
             // assign locales information
-            $sm = $event->getApplication()->getServiceManager();
-            $session = $sm->get('session');
-            if (isset($session->locale)) {
-                $view->setVariable('locale', $session->locale);
-            }
-            if (isset($session->locales)) {
-                $view->setVariable('locales', $session->locales);
-            }
+            $sm = $this->getServiceLocator();
+            $config = $sm->get('Configuration');
+            $view->setVariable('locale', $sm->get('translator')->getLocale());
+            $view->setVariable('locales', $config['locales']['list']);
 
             // assign flashmessanger messages
             $messages = $this->flashmessenger()->getSuccessMessages();
@@ -121,5 +117,21 @@ class DefaultController extends AbstractActionController
     {
         $helper = $this->getServiceLocator()->get('viewhelpermanager')->get('translate');
         return $helper($text);
+    }
+
+    protected function _memoryUsage()
+    {
+        $mem_usage = memory_get_usage(true);
+        $usage = '';
+
+        if ($mem_usage < 1024) {
+            $usage = $mem_usage . ' bytes';
+        } elseif ($mem_usage < 1048576) {
+            $usage = round($mem_usage/1024,2) . ' kilobytes';
+        } else {
+            $usage = round($mem_usage/1048576,2) . ' megabytes';
+        }
+
+        return $usage;
     }
 }
