@@ -48,29 +48,36 @@ class DefaultController extends AbstractActionController
         $event = $this->getEvent();
         $this->viewModel = $event->getViewModel();
 
-        $this->viewModel->setVariable('construct', __NAMESPACE__ . '\\' . __CLASS__);
-
         $sharedEvents = StaticEventManager::getInstance();
         $sharedEvents->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, function(Event $event) {
-            // get view model
-            $viewModel = $event->getViewModel();
+            // get view model for layout
+            $view = $event->getViewModel();
+
+            // assign locales information
+            $sm = $this->getServiceLocator();
+            $config = $sm->get('Configuration');
+            $view->setVariable('locale', $sm->get('translator')->getLocale());
+            $view->setVariable('locales', $config['locales']['list']);
 
             // assign identity
             $identity = null;
             if ($this->getServiceLocator()->get('AuthService')->hasIdentity()) {
                 $identity = $this->getServiceLocator()->get('AuthService')->getIdentity();
             }
-            $viewModel->setVariable('identity', $identity);
+            $view->setVariable('identity', $identity);
 
             // assign flashmessanger messages
             $messages = $this->flashmessenger()->getSuccessMessages();
-            $viewModel->setVariable('messages', $messages);
+            $view->setVariable('messages', $messages);
             $info = $this->flashmessenger()->getInfoMessages();
-            $viewModel->setVariable('info', $info);
+            $view->setVariable('info', $info);
             $warnings = $this->flashmessenger()->getMessages();
-            $viewModel->setVariable('warnings', $warnings);
+            $view->setVariable('warnings', $warnings);
             $errors = $this->flashmessenger()->getErrorMessages();
-            $viewModel->setVariable('errors', $errors);
+            $view->setVariable('errors', $errors);
+
+            // assign variables to action view
+            $this->viewModel->setVariables($view->getVariables());
         });
     }
 
@@ -117,5 +124,21 @@ class DefaultController extends AbstractActionController
     {
         $helper = $this->getServiceLocator()->get('viewhelpermanager')->get('translate');
         return $helper($text);
+    }
+
+    protected function _memoryUsage()
+    {
+        $mem_usage = memory_get_usage(true);
+        $usage = '';
+
+        if ($mem_usage < 1024) {
+            $usage = $mem_usage . ' bytes';
+        } elseif ($mem_usage < 1048576) {
+            $usage = round($mem_usage/1024,2) . ' kilobytes';
+        } else {
+            $usage = round($mem_usage/1048576,2) . ' megabytes';
+        }
+
+        return $usage;
     }
 }
